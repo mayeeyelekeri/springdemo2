@@ -15,8 +15,8 @@ phases:
       - wget https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-x64_bin.tar.gz -P /tmp
       - tar xzf /tmp/openjdk-18_linux-x64_bin.tar.gz -C /opt
       - rm -rf /tmp/openjdk-18_linux-x64_bin.tar.gz
-      - alternatives --install /usr/bin/java java /opt/jdk-18/bin/java 2
-      - alternatives --install /usr/bin/javac javac /opt/jdk-18/bin/javac 2
+      - update-alternatives --install /usr/bin/java java /opt/jdk-18/bin/java 1
+      - update-alternatives --install /usr/bin/javac javac /opt/jdk-18/bin/javac 1
 
   build:
     commands:
