@@ -24,8 +24,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo after install 
-      - export JAVA_HOME=/opt/jdk-18
-      - export PATH=/opt/jdk-18/bin:$PATH
+      - set JAVA_HOME=/opt/jdk-18
+      - set PATH=/opt/jdk-18/bin:$PATH
       - javac --version 
       - java --version
       - which java 
