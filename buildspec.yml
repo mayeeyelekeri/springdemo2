@@ -19,13 +19,13 @@ phases:
       - echo before install 
       - update-alternatives --install /usr/bin/java java /opt/jdk-18/bin/java 3
       - update-alternatives --install /usr/bin/javac javac /opt/jdk-18/bin/javac 3
-      - update-alternatives --config javac 3
-      - update-alternatives --config java 3
 
   build:
     commands:
       - echo Build started on `date`
       - echo after install 
+      - export JAVA_HOME=/opt/jdk-18
+      - export PATH=/opt/jdk-18/bin:$PATH
       - javac --version 
       - java --version
       - which java 
