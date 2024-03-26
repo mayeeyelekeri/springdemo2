@@ -44,7 +44,8 @@ phases:
       - cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
       - ls -lrt codedeploy
       - cd codedeploy && zip -r ../springdemo2.zip * 
-      - ls -lrt springdemo2.zip
+      - pwd 
+      - ls -lrt
 artifacts:
   files:
     - springdemo2.zip
