@@ -17,8 +17,10 @@ phases:
       - which java 
       - which javac 
       - echo before install 
-      - update-alternatives --install /usr/bin/java java /opt/jdk-18/bin/java 2
-      - update-alternatives --install /usr/bin/javac javac /opt/jdk-18/bin/javac 2
+      - update-alternatives --install /usr/bin/java java /opt/jdk-18/bin/java 1
+      - update-alternatives --install /usr/bin/javac javac /opt/jdk-18/bin/javac 1
+      - update-alternatives --config java
+      - update-alternatives --config javac
 
   build:
     commands:
