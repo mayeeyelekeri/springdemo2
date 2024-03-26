@@ -1,13 +1,17 @@
 version: 0.1
 
 phases:
-  pre_build:
+
+  install:
     commands:
       - echo Pre-Build started on `date`
-      - yum install -y wget unzip zip jq mysql ansible
       - echo before install 
       - java --version 
       - javac --version 
+      - which java 
+      - which javac 
+      - echo before install 
+      - yum install -y wget unzip zip jq 
       - wget https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-x64_bin.tar.gz -P /tmp
       - tar xzf /tmp/openjdk-18_linux-x64_bin.tar.gz -C /opt
       - rm -rf /tmp/openjdk-18_linux-x64_bin.tar.gz
@@ -17,6 +21,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - echo after install 
       - javac --version 
       - java --version
       - mvn clean package
