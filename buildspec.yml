@@ -6,15 +6,17 @@ phases:
     commands:
       - echo Pre-Build started on `date`
       - echo before install 
-      - java --version 
-      - javac --version 
-      - which java 
-      - which javac 
-      - echo before install 
       - yum install -y wget unzip zip jq 
       - wget https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-x64_bin.tar.gz -P /tmp
       - tar xzf /tmp/openjdk-18_linux-x64_bin.tar.gz -C /opt
       - rm -rf /tmp/openjdk-18_linux-x64_bin.tar.gz
+      - java --version 
+      - javac --version 
+      - ls -lrt /usr/bin/java 
+      - ls -lrt /usr/bin/javac 
+      - which java 
+      - which javac 
+      - echo before install 
       - update-alternatives --install /usr/bin/java java /opt/jdk-18/bin/java 2
       - update-alternatives --install /usr/bin/javac javac /opt/jdk-18/bin/javac 2
 
@@ -24,6 +26,10 @@ phases:
       - echo after install 
       - javac --version 
       - java --version
+      - which java 
+      - which javac 
+      - ls -lrt /usr/bin/java 
+      - ls -lrt /usr/bin/javac 
       - mvn clean package
       - echo Build Ended on `date`
 
