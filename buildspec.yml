@@ -5,6 +5,7 @@ phases:
   install:
     runtime-versions:
       java: corretto17
+
     commands:
       - echo Pre-Build started on `date`
       - echo before install 
@@ -21,13 +22,13 @@ phases:
       - echo before install 
       - update-alternatives --install /usr/bin/java java /opt/jdk-18/bin/java 3
       - update-alternatives --install /usr/bin/javac javac /opt/jdk-18/bin/javac 3
+      - yum install java-17-amazon-corretto-devel -y
+      - alternatives --set java /usr/lib/jvm/java-17-amazon-corretto.aarch64/bin/java
 
   build:
     commands:
       - echo Build started on `date`
       - echo after install 
-      - set JAVA_HOME=/opt/jdk-18
-      - set PATH=/opt/jdk-18/bin:$PATH
       - javac --version 
       - java --version
       - which java 
