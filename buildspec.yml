@@ -50,5 +50,5 @@ phases:
       - ls -lrt
 artifacts:
   files:
-    - codedeploy/**/*
+    - codedeploy/**/**/*
   discard-paths: yes
