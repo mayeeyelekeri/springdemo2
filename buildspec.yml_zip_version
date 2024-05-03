@@ -1,0 +1,52 @@
+version: 0.2
+
+phases:
+
+  install:
+
+    commands:
+      - echo Pre-Build started on `date`
+#      - echo before install 
+#      - yum install -y wget unzip zip jq 
+#      - wget https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-x64_bin.tar.gz -P /tmp
+#      - tar xzf /tmp/openjdk-18_linux-x64_bin.tar.gz -C /opt
+#      - rm -rf /tmp/openjdk-18_linux-x64_bin.tar.gz
+#      - java --version 
+#      - javac --version 
+#      - ls -lrt /usr/bin/java 
+#      - ls -lrt /usr/bin/javac 
+#      - which java 
+#      - which javac 
+#      - echo before install 
+#      - update-alternatives --install /usr/bin/java java /opt/jdk-18/bin/java 3
+#      - update-alternatives --install /usr/bin/javac javac /opt/jdk-18/bin/javac 3
+#      - yum install java-17-amazon-corretto-devel -y
+#      - alternatives --install /usr/bin/java java /usr/lib/jvm/java-17-amazon-corretto.aarch64/bin/java 3
+#      - alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-17-amazon-corretto.aarch64/bin/javac 3
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo after install 
+      - javac --version 
+      - java --version
+      - which java 
+      - which javac 
+      - ls -lrt /usr/bin/java 
+      - ls -lrt /usr/bin/javac 
+      - mvn clean package
+      - echo Build Ended on `date`
+
+  post_build:
+    commands:
+      - echo bucket name is $BUCKET_NAME
+      - ls -lrt target 
+      - cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
+      - ls -lrt codedeploy
+      - cd codedeploy && zip -r ../springdemo2.zip * 
+      - pwd 
+      - ls -lrt
+artifacts:
+  files:
+    - springdemo2.zip
+  discard-paths: yes
