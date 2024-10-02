@@ -15,4 +15,4 @@ artifacts:
   files:
     #- target/springdemo2-1.0.0-SNAPSHOT.jar 
     - src 
-  discard-paths: yes
+  discard-paths: false
