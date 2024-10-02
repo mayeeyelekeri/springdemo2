@@ -7,11 +7,12 @@ phases:
 #      - mvn clean package
 #      - echo Build Ended on `date`
 #
-  post_build:
-    commands:
-      - cp buildspec.yml buildspec5.yml
-      #- cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
-#artifacts:
-#  files:
-#    - target/springdemo2-1.0.0-SNAPSHOT.jar 
-#  discard-paths: yes
+#  post_build:
+#    commands:
+#      - cp buildspec.yml buildspec5.yml
+#      #- cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
+artifacts:
+  files:
+    #- target/springdemo2-1.0.0-SNAPSHOT.jar 
+    - buildspec.yml 
+  discard-paths: yes
