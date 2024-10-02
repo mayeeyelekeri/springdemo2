@@ -10,7 +10,7 @@ phases:
   post_build:
     commands:
       - cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
-artifacts:
-  files:
-    - target/springdemo2-1.0.0-SNAPSHOT.jar 
-  discard-paths: yes
+#artifacts:
+#  files:
+#    - target/springdemo2-1.0.0-SNAPSHOT.jar 
+#  discard-paths: yes
