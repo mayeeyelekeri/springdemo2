@@ -5,7 +5,7 @@ env:
      MSG: "hello from runner2" 
 
    secrets-manager: 
-     MYSQL_ENDPOINT: "db_creds/mysql_endpoint"
+     MYSQL_ENDPOINT: "db_creds:mysql_endpoint"
 
 phases:
 
