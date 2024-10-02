@@ -17,3 +17,4 @@ artifacts:
     - '**/*' 
   base-directory: src
   discard-paths: false
+  name: srczip
