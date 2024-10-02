@@ -12,23 +12,20 @@ env:
 
 phases:
 
-#  build:
-#    commands:
-#      - mvn clean package
-#      - echo Build Ended on `date`
-#
+  build:
+    commands:
+      - mvn clean package
+      - echo Build Ended on `date`
+
   post_build:
     commands:
-      - rm -rf src/test
-      - ls -lrt src 
-      - echo removed src/test 
       - echo message from codebuild $MSG 
       - echo endpoint $MYSQL_ENDPOINT 
       - echo my cidr block is $CIDR
 
-      #- cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
+      - cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
 artifacts:
   files:
     - '**/*'
-  base-directory: src 
+  base-directory: cedeploy 
   discard-paths: false  
