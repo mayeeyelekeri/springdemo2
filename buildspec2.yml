@@ -13,6 +13,6 @@ version: 0.2
 #      #- cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
 artifacts:
   files:
-    - **/*'
+    - '**/*'
   base-directory: src 
   discard-paths: false  
