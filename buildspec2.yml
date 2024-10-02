@@ -1,15 +1,17 @@
 version: 0.2
 
-#phases:
+phases:
 
 #  build:
 #    commands:
 #      - mvn clean package
 #      - echo Build Ended on `date`
 #
-#  post_build:
-#    commands:
-#      - rm -rf src/test
+  post_build:
+    commands:
+      - rm -rf src/test
+      - ls -lrt src 
+      - echo removed src/test 
       #- cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
 artifacts:
   files:
