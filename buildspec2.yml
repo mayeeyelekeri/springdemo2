@@ -11,8 +11,8 @@ version: 0.2
 #    commands:
 #      - cp buildspec.yml buildspec5.yml
 #      #- cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
-#artifacts:
-#  files:
-#    #- target/springdemo2-1.0.0-SNAPSHOT.jar 
-#    - buildspec.yml 
-#  discard-paths: yes
+artifacts:
+  files:
+    #- target/springdemo2-1.0.0-SNAPSHOT.jar 
+    - src 
+  discard-paths: yes
