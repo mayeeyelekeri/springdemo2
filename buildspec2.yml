@@ -14,5 +14,6 @@ version: 0.2
 artifacts:
   files:
     #- target/springdemo2-1.0.0-SNAPSHOT.jar 
-    - src 
+    - '**' 
+  base-directory: src
   discard-paths: false
