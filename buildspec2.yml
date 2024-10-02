@@ -2,14 +2,14 @@ version: 0.2
 
 phases:
 
-  build:
-    commands:
-      - mvn clean package
-      - echo Build Ended on `date`
-
-  post_build:
-    commands:
-      - cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
+#  build:
+#    commands:
+#      - mvn clean package
+#      - echo Build Ended on `date`
+#
+#  post_build:
+#    commands:
+#      - cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
 #artifacts:
 #  files:
 #    - target/springdemo2-1.0.0-SNAPSHOT.jar 
