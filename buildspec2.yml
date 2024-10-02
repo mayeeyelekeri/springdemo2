@@ -7,6 +7,9 @@ env:
    secrets-manager: 
      MYSQL_ENDPOINT: "db_creds:mysql_endpoint"
 
+   parameter-store: 
+     CIDR: "/dev/network/vpc_cidr" 
+
 phases:
 
 #  build:
@@ -21,6 +24,8 @@ phases:
       - echo removed src/test 
       - echo message from codebuild $MSG 
       - echo endpoint $MYSQL_ENDPOINT 
+      - echo my cidr block is $CIDR
+
       #- cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
 artifacts:
   files:
