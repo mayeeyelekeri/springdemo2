@@ -1,5 +1,12 @@
 version: 0.2
 
+env: 
+   variables: 
+     MSG: "hello from runner2" 
+
+   secrets-manager: 
+     MYSQL_ENDPOINT: "db_creds/mysql_endpoint"
+
 phases:
 
 #  build:
@@ -12,6 +19,8 @@ phases:
       - rm -rf src/test
       - ls -lrt src 
       - echo removed src/test 
+      - echo message from codebuild $MSG 
+      - echo endpoint $MYSQL_ENDPOINT 
       #- cp target/springdemo2-1.0.0-SNAPSHOT.jar codedeploy 
 artifacts:
   files:
