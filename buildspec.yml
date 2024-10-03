@@ -48,7 +48,15 @@ phases:
       # 
       - pwd 
       - ls -lrt
+      
 artifacts:
   files:
-    - codedeploy/**/**/*
-  discard-paths: yes
+    - '**/*'
+  base-directory: codedeploy 
+  discard-paths: false  
+  
+reports: 
+  SureFireReports:
+    files:
+      - '**/*'
+    base-directory: 'target/surefire-reports'
