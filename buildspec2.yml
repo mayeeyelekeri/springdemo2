@@ -34,4 +34,4 @@ reports:
   SureFireReports:
     files:
       - '**/*'
-    base-directory: 'target/surefile-reports' 
+    base-directory: 'target/surefire-reports' 
