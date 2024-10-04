@@ -29,3 +29,10 @@ artifacts:
     - '**/*'
   base-directory: codedeploy 
   discard-paths: false  
+  
+reports: 
+  SureFireReports:
+    files:
+      - '**/*'
+    base-directory: 'target/surefire-reports' 
+
