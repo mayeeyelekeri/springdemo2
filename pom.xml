@@ -16,6 +16,14 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
+        <distributionManagement>
+           <repository>
+                 <id>codeart</id> 
+                 <url>${env.APPARTIFACT_REPO}</url> 
+           </repository>
+        </distributionManagement>
+
 	<dependencies>
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
@@ -65,5 +73,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
