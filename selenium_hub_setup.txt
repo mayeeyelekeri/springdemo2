@@ -1,0 +1,6 @@
+Reference : https://www.browserstack.com/guide/run-selenium-tests-in-docker
+
+
+-- start hub 
+docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
+
