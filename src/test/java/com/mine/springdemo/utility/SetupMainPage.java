@@ -24,13 +24,14 @@ public class SetupMainPage {
                         //options.setCapability("browserName", "chrome");
 			options.addArguments("--ignore-ssl-errors=yes");
 			options.addArguments("--ignore-certificate-errors");
-			options.addArguments("--headless=new");
+			//options.addArguments("--headless=new");
 
-                        try {
-                                driver = new RemoteWebDriver(new URL("http://192.168.99.99:4444/"), options);
-                        } catch (Exception e) {
-                                System.out.println(".......... ERROR: caught URL exception");
-                        }
+            try {
+                //driver = new RemoteWebDriver(new URL("http://192.168.99.99:4444/"), options);
+                driver = new ChromeDriver(options); 
+            } catch (Exception e) {
+                System.out.println(".......... ERROR: caught URL exception");
+            }
 
 			
 			System.out.println("driver = "+driver);
