@@ -1,12 +1,19 @@
+
 FROM openjdk:18-jdk-alpine
 MAINTAINER Mahesh
+
+# Variables, which would be used here 
+ARG JAR="springdemo2-1.0.0.jar"
 
 # Default value is "development", could be changed by passing other env 
 ENV MY_ENV=development 
 
-COPY target/springdemo2-1.0.0-SNAPSHOT.jar springdemo2-1.0.0-SNAPSHOT.jar
+CMD echo msg is $JAR
+COPY target/springdemo2-1.0.0.jar springdemo2-1.0.0.jar 
+#COPY "target/${JAR}"  $JAR 
 
 ENV WELCOME_MESSAGE="message from dockerfile" 
 
-ENTRYPOINT ["java","-jar","/springdemo2-1.0.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","springdemo2-1.0.0.jar"]
+#ENTRYPOINT ["java","-jar","/$JAR"]
 
