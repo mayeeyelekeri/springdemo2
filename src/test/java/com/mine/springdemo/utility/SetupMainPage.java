@@ -20,10 +20,14 @@ public class SetupMainPage {
 			
 			ChromeOptions options = new ChromeOptions();
                         //options.setCapability("browserVersion", "131.0");
-                        options.setCapability("platformName", "linux");
+                        //options.setCapability("platformName", "linux");
+                        //options.setCapability("browserName", "chrome");
+			options.addArguments("--ignore-ssl-errors=yes");
+			options.addArguments("--ignore-certificate-errors");
+			options.addArguments("--headless=new");
 
                         try {
-                                driver = new RemoteWebDriver(new URL("http://192.168.99.99:4444"), options);
+                                driver = new RemoteWebDriver(new URL("http://192.168.99.99:4444/"), options);
                         } catch (Exception e) {
                                 System.out.println(".......... ERROR: caught URL exception");
                         }
