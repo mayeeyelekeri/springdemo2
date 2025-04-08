@@ -6,5 +6,7 @@ ENV MY_ENV=development
 
 COPY target/springdemo2-1.0.0-SNAPSHOT.jar springdemo2-1.0.0-SNAPSHOT.jar
 
+ENV WELCOME_MESSAGE="message from dockerfile" 
+
 ENTRYPOINT ["java","-jar","/springdemo2-1.0.0-SNAPSHOT.jar"]
 
