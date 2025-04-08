@@ -17,12 +17,11 @@ public class MainPageController {
 	
 	@GetMapping("/")
 	public String index(Model model) {
-		System.out.println("IP Address is " + ipAddress); 
-		
+		System.out.println("inside MainPageController, IP Address from ENV: " + ipAddress); 
 		
 		try {
-			InetAddress myIP; 
-            myIP = InetAddress.getLocalHost();
+			InetAddress myIP = InetAddress.getLocalHost();
+			System.out.println("system generated IP address: "+ myIP); 
             model.addAttribute("myIP", myIP); 
         } catch (UnknownHostException e) {
             e.printStackTrace();

@@ -6,15 +6,20 @@
     <link rel="stylesheet" href="css/basic.css">
 </head>
 <body>
-    <h2> Sample Application <i><font color="blue"> SpringDemo3 </font> </i></h2>
+    <h2> Greetings and Salutations</h2>
     
+    <p>
+        Message:     
+        <b> </i><th:block th:text="${welcomeMessage}"></th:block>  </b> 
+    </p>
+        
     <p>
     Server IP Address:     
     <b> <th:block th:text="${myIP}"></th:block>  </b> 
     </p>
 
-    <h3> There is a message for you here ....   
-        <a href="/greeting"> Click Me </a>
+    <h3>   
+        <a href="/"> Main Page </a>
     </h3>
 </body>
 </html>
