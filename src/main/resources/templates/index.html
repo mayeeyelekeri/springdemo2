@@ -1,6 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="css/basic.css">
+</head>
 <body>
-	<h1>Index.html of springboot2 app </h1>
+    <h2> Sample Application <i><font color="blue"> SpringDemo3 </font> </i> </h2></h2>
+    
+    <p>
+    Server IP Address:     
+    <b> <th:block th:text="${myIP}"></th:block>  </b> 
+    </p>
+
+    <h3> There is a message for you here ....   
+        <a href="/greeting"> Click Me </a>
+    </h3>
 </body>
 </html>
