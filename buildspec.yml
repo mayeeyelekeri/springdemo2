@@ -57,6 +57,7 @@ phases:
       # Create an image and push to ECR 
       - echo image repo $springdemo_image_repo
       - docker build -t $springdemo_image_repo . 
+      - docker push $springdemo_image_repo
       - docker images 
       
 artifacts:
