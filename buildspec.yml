@@ -56,7 +56,8 @@ phases:
       
       # Create an image and push to ECR 
       - echo image repo $springdemo_image_repo
-      - docker build -t $springdemo_image_repo . 
+      - docker build -t $springdemo_image_repo .
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 211125687662.dkr.ecr.us-east-1.amazonaws.com 
       - docker push $springdemo_image_repo
       - docker images 
       
