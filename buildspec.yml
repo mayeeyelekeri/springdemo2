@@ -39,8 +39,7 @@ phases:
       - which javac 
       - ls -lrt /usr/bin/java 
       - ls -lrt /usr/bin/javac 
-      # - mvn clean package -Dmaven.test.skip=true
-      - touch target/springdemo2-1.0.0.jar
+      - mvn clean package -Dmaven.test.skip=true
       - echo Build Ended on `date`
 
   post_build:
