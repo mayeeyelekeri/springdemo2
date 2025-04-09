@@ -61,7 +61,9 @@ phases:
       - echo accountID = $accountID
       - echo aws region = $AWS_REGION 
       - echo account ID prefix value = $accountId.dkr.ecr.us-east-1.amazonaws.com 
-      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $accountId.dkr.ecr.us-east-1.amazonaws.com 
+      - postfix="dkr.ecr.us-east-1.amazonaws.com"
+      - accountName=$accountId.$postfix
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $accountName 
       - commitId=`git log --format="%H" -n 1`
       
       - echo commitID is $commitId
