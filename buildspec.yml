@@ -2,6 +2,9 @@ version: 0.2
 
 phases:
 
+  env: 
+    parameter-store:
+        springdemo_image_repo: /dev/ecs/ecr_repository
   install:
 
     commands:
@@ -50,7 +53,8 @@ phases:
       - ls -lrt
       
       # Create an image and push to ECR 
-      - docker build -t springdemo . 
+      - echo image repo $springdemo_image_repo
+      - docker build -t $springdemo_image_repo . 
       - docker images 
       
 artifacts:
