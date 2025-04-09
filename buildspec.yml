@@ -49,6 +49,10 @@ phases:
       - pwd 
       - ls -lrt
       
+      # Create an image and push to ECR 
+      - docker build -t springdemo . 
+      - docker images 
+      
 artifacts:
   files:
     - '**/*'
