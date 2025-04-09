@@ -1,10 +1,12 @@
 version: 0.2
 
+env: 
+  parameter-store:
+      springdemo_image_repo: /dev/ecs/ecr_repository
+      
 phases:
 
-  env: 
-    parameter-store:
-        springdemo_image_repo: /dev/ecs/ecr_repository
+
   install:
 
     commands:
