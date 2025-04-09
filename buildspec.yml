@@ -39,7 +39,8 @@ phases:
       - which javac 
       - ls -lrt /usr/bin/java 
       - ls -lrt /usr/bin/javac 
-      - mvn clean package -Dmaven.test.skip=true
+      # - mvn clean package -Dmaven.test.skip=true
+      - touch target/springdemo2-1.0.0.jar
       - echo Build Ended on `date`
 
   post_build:
@@ -56,11 +57,10 @@ phases:
       
       # Create an image and push to ECR 
       - echo image repo $springdemo_image_repo
-      - docker build -t $springdemo_image_repo .
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 211125687662.dkr.ecr.us-east-1.amazonaws.com 
-      - commitID=`git log --format="%H" -n 1`
-      - echo commitID is $commitID
-      - docker push $springdemo_image_repo:`git log --format="%H" -n 1`
+      - commitId=`git log --format="%H" -n 1`
+      - echo commitID is $commitId
+      - docker build -t $springdemo_image_repo:$commitId .
       - docker push $springdemo_image_repo:$commitId
       - docker images 
       
