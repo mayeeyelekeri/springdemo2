@@ -39,15 +39,16 @@ phases:
       - which javac 
       - ls -lrt /usr/bin/java 
       - ls -lrt /usr/bin/javac 
-      - mvn clean package -Dmaven.test.skip=true
+      #- mvn clean package -Dmaven.test.skip=true
       - echo Build Ended on `date`
 
   post_build:
     commands:
-      - echo bucket name is $BUCKET_NAME
-      - ls -lrt target 
-      - cp target/springdemo2-1.0.0.jar codedeploy 
-      - ls -lrt codedeploy
+      #- echo bucket name is $BUCKET_NAME
+      #- ls -lrt target 
+      #- cp target/springdemo2-1.0.0.jar codedeploy 
+      #- ls -lrt codedeploy
+      
       # zipping is causing the issue during codedeploy 
       # - cd codedeploy && zip -r ../springdemo2.zip * 
       # 
@@ -57,6 +58,9 @@ phases:
       # Create an image and push to ECR 
       - echo image repo $springdemo_image_repo
       - accountID=`aws sts get-caller-identity --query Account --output text`
+      - echo accountID = $accountID
+      - echo aws region = $AWS_REGION 
+      - echo account ID prefix value = $accountId.dkr.ecr.us-east-1.amazonaws.com 
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $accountId.dkr.ecr.us-east-1.amazonaws.com 
       - commitId=`git log --format="%H" -n 1`
       
