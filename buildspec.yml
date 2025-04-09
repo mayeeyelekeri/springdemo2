@@ -56,7 +56,7 @@ phases:
       
       # Create an image and push to ECR 
       - echo image repo $springdemo_image_repo
-      - awsAccountID=`aws sts get-caller-identity --query Account --output text`
+      - accountID=`aws sts get-caller-identity --query Account --output text`
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $accountId.dkr.ecr.us-east-1.amazonaws.com 
       - commitId=`git log --format="%H" -n 1`
       
