@@ -43,7 +43,7 @@ phases:
       - ls -lrt target 
       - cp target/springdemo2-1.0.0.jar codedeploy-ec2 
       - ls -lrt codedeploy-ec2
-      - cp codedeploy-ec2/appspec_ec2.yml codedeploy-ec2/appspec.yml
+      - cp codedeploy-ec2/appspec_ec.yml codedeploy-ec2/appspec.yml
       - cd codedeploy-ec2 && zip -r ../springdemo2.zip * 
       - pwd 
       - ls -lrt
