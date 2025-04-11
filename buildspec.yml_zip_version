@@ -41,10 +41,10 @@ phases:
     commands:
       - echo bucket name is $BUCKET_NAME
       - ls -lrt target 
-      - cp target/springdemo2-1.0.0.jar codedeploy 
-      - ls -lrt codedeploy
-      - cp codedeploy/appspec_ec2.yml codedeploy/appspec.yml
-      - cd codedeploy && zip -r ../springdemo2.zip * 
+      - cp target/springdemo2-1.0.0.jar codedeploy-ec2 
+      - ls -lrt codedeploy-ec2
+      - cp codedeploy-ec2/appspec_ec2.yml codedeploy-ec2/appspec.yml
+      - cd codedeploy-ec2 && zip -r ../springdemo2.zip * 
       - pwd 
       - ls -lrt
 artifacts:
