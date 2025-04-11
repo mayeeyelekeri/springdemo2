@@ -46,15 +46,7 @@ phases:
       - cd codedeploy-ec2 && zip -r ../springdemo2.zip * 
       - pwd 
       - ls -lrt
-      
-      - cp -r codedeploy-ec2/* .
-       
 artifacts:
   files:
-    - springdemo2-1.0.0.jar
-    - appspec.yml 
-    - Dockerfile 
-    - scripts/start_server.sh 
-    - scripts/stop_server.sh
-    - scripts/install_dependencies.sh
-  discard-paths: no
+    - springdemo2.zip
+  discard-paths: yes
