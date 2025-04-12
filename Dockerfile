@@ -12,7 +12,7 @@ CMD echo msg is $JAR
 COPY target/springdemo2-1.0.0.jar springdemo2-1.0.0.jar 
 #COPY "target/${JAR}"  $JAR 
 
-ENV WELCOME_MESSAGE="message from dockerfile" 
+ENV WELCOME_MESSAGE="message from dockerfile on April 12th 2025" 
 
 ENTRYPOINT ["java","-jar","springdemo2-1.0.0.jar"]
 #ENTRYPOINT ["java","-jar","/$JAR"]
