@@ -65,7 +65,7 @@ phases:
       - accountName=$accountID.$postfix
       - echo accountName = $accountName 
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $accountName 
-      - commitId=`git log --format="%H" -n 1`
+      #- commitId=`git log --format="%H" -n 1`
       - commitId="latest"
       
       - echo commitID is $commitId
