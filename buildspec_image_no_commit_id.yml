@@ -73,10 +73,12 @@ phases:
       - docker push $springdemo_image_repo:$commitId
       - docker images 
       
+      # Generate Imagedefinitions.json file which is required to perform deployment 
+      - printf '[{"name":"SpringDemo","imageUri":"471112520049.dkr.ecr.us-east-1.amazonaws.com/springdemo:1aaa57cf065f55889e5110ce28fe4c6e76c6bdef"}]' > imagedefinitions.json
+      
 artifacts:
   files:
-    - '**/*'
-  base-directory: codedeploy 
+    - imagedefinitions.json
   discard-paths: false  
   
 reports: 
