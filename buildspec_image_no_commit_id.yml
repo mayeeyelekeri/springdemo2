@@ -3,7 +3,8 @@ version: 0.2
 env: 
   parameter-store:
       springdemo_image_repo: /dev/ecs/ecr_repository
-      
+      container_name: /dev/ecs/container_name
+      image_name: /dev/ecs/image_name
 phases:
 
 
@@ -66,7 +67,8 @@ phases:
       - echo accountName = $accountName 
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $accountName 
       #- commitId=`git log --format="%H" -n 1`
-      - commitId="latest"
+      # Get current time for commitId
+      - commitId=`date +%s`
       
       - echo commitID is $commitId
       - docker build -t $springdemo_image_repo:$commitId .
@@ -74,7 +76,8 @@ phases:
       - docker images 
       
       # Generate Imagedefinitions.json file which is required to perform deployment 
-      - printf '[{"name":"SpringDemo","imageUri":"471112520049.dkr.ecr.us-east-1.amazonaws.com/springdemo:latest"}]' > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s%s%s"}]' "$container_name" "$accountName"/"$image_name":"$commitId" > imagedefinitions.json
+      - cat imagedefinitions.json 
       
 artifacts:
   files:
