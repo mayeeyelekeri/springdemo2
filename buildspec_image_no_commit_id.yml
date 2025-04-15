@@ -1,6 +1,11 @@
 version: 0.2
 
 env: 
+  variables: 
+    task_name: "springdemo" 
+    container_name: "SpringDemo" 
+    postfix: "dkr.ecr.us-east-1.amazonaws.com"
+    
   parameter-store:
       springdemo_image_repo: /dev/ecs/ecr_repository
       container_name: /dev/ecs/container_name
@@ -25,6 +30,8 @@ phases:
       - ls -lrt /usr/bin/javac 
       - mvn clean package -Dmaven.test.skip=true
       - echo Build Ended on `date`
+      - echo listing all tasks during build phase 
+      - aws ecs list-task-definitions 
 
   post_build:
     commands:
@@ -45,7 +52,6 @@ phases:
       - echo accountID = $accountID
       - echo aws region = $AWS_REGION 
       - echo account ID prefix value = $accountId.dkr.ecr.us-east-1.amazonaws.com 
-      - postfix="dkr.ecr.us-east-1.amazonaws.com"
       - accountName=$accountID.$postfix
       - echo accountName = $accountName 
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $accountName 
@@ -57,6 +63,8 @@ phases:
       - docker build -t $springdemo_image_repo:$commitId .
       - docker push $springdemo_image_repo:$commitId
       - docker images 
+      - echo listing all tasks after push to ECR 
+      - aws ecs list-task-definitions 
       
       # Generate Imagedefinitions.json file which is required to perform deployment 
       - printf '[{"name":"%s","imageUri":"%s%s%s"}]' "$container_name" "$accountName"/"$image_name":"$commitId" > imagedefinitions.json
@@ -65,14 +73,18 @@ phases:
       # Generate appspec.yaml file 
       # Get new task definition version 
       # - taskDefVersion=getNewTaskDefinitionRevision.sh $accountId "springdemo"  
-      - taskName="springdemo" 
-      - taskVer=`aws ecs describe-task-definition --task-definition $taskName --query "taskDefinition.revision"`
+      - taskVer=`aws ecs describe-task-definition --task-definition $task_name --query "taskDefinition.revision"`
       - taskVer=$((taskVer + 1))
       - echo new Task ver = $taskVer
       - sed -i -e "s/ACCOUNT_ID/$accountID/" codedeploy/appspec.yml 
-      - sed -i -e "s/TASKDEF/springdemo/" codedeploy/appspec.yml 
+      - sed -i -e "s/TASKDEF/$task_name/" codedeploy/appspec.yml 
       - sed -i -e "s/VERSION/$taskVer/" codedeploy/appspec.yml 
       - cat codedeploy/appspec.yml
+      - echo listing all tasks after post_build phase 
+      - aws ecs list-task-definitions 
+      - taskVer=`aws ecs describe-task-definition --task-definition $task_name --query "taskDefinition.revision"`
+      - taskVer=$((taskVer + 1))
+      - echo new Task ver = $taskVer
 
 artifacts:
   files:
