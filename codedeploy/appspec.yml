@@ -1,23 +1,13 @@
 version: 0.0
 Resources:
 
-    # Pre-Requisites:
-    # - Network is setup
-    # 
-    # - Target ECS service should have been created  
-    # 
-    - TargetService:
-      Type: AWS::ECS::Service
+ - TargetService:
+    Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: TASKDEF_ARN
+        TaskDefinition: "arn:aws:ecs:us-east-1:ACCOUNT_ID:task-definition/TASKDEF:VERSION"
         LoadBalancerInfo:
           ContainerName: "springdemo"
           ContainerPort: 80
 
 Hooks:
-   - AfterAllowTestTraffic: "AfterAllowTestTraffic"
-
-#  - BeforeInstall: "LambdaFunctionToValidateBeforeInstall"
-#  - AfterInstall: "LambdaFunctionToValidateAfterInstall"
-#  - BeforeAllowTraffic: "LambdaFunctionToValidateBeforeAllowingProductionTraffic"
-#  - AfterAllowTraffic: "ductionTraffic"
+  - AfterAllowTestTraffic: "AfterAllowTestTraffic"
