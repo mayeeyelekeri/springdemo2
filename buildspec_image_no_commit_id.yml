@@ -68,7 +68,8 @@ phases:
       - taskName="springdemo" 
       - taskVer=`aws ecs describe-task-definition --task-definition $taskName --query "taskDefinition.revision"`
       - taskVer=$((taskVer + 1))
-      - sed -i 's/ACCOUNT_ID/$accountId/' codedeploy/appspec.yml 
+      - echo new Task ver = $taskVer
+      - sed -i 's/ACCOUNT_ID/$accountID/' codedeploy/appspec.yml 
       - sed -i 's/TASKDEF/springdemo/' codedeploy/appspec.yml 
       - sed -i 's/VERSION/$taskVer/' codedeploy/appspec.yml 
       - cat codedeploy/appspec.yml
