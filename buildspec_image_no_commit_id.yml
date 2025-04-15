@@ -78,4 +78,4 @@ artifacts:
   files:
     - imagedefinitions.json
     - codedeploy/appspec.yml
-  discard-paths: yes  
+  discard-paths: no  
