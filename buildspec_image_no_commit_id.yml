@@ -71,7 +71,7 @@ phases:
       - echo new Task ver = $taskVer
       - sed -i -e "s/ACCOUNT_ID/$accountID/" codedeploy/appspec.yml 
       - sed -i -e "s/TASKDEF/springdemo/" codedeploy/appspec.yml 
-      - sed -i -e "s/VERSION/${taskVer}/" codedeploy/appspec.yml 
+      - sed -i -e "s/VERSION/$taskVer/" codedeploy/appspec.yml 
       - cat codedeploy/appspec.yml
 
 artifacts:
