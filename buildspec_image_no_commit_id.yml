@@ -79,3 +79,10 @@ artifacts:
     - imagedefinitions.json
     - codedeploy/appspec.yml
   discard-paths: no  
+
+reports: 
+  SureFireReports:
+    files:
+      - '**/*'
+    base-directory: 'target/surefire-reports'
+
