@@ -12,7 +12,6 @@ env:
       image_name: /dev/ecs/image_name
 phases:
 
-
   install:
 
     commands:
@@ -75,7 +74,7 @@ phases:
       - cp codedeploy/appspec.yml appspec.yml
       - taskDefVersion=getNewTaskDefinitionRevision.sh $accountId "springdemo"  
       - echo new task def: $taskDefVersion 
-      - sed -i -e "s/TASKDEF/$taskDefVersion/" appspec.yml 
+      - sed -i -e "s/TASKDEF/${taskDefVersion}/" appspec.yml 
       - cat appspec.yml
       - echo listing all tasks after post_build phase 
       - aws ecs list-task-definitions 
