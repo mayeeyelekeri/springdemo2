@@ -76,7 +76,7 @@ phases:
       - taskDefVersion=`./getNewTaskDefinitionRevision.sh $accountID $task_name`  
       #- taskDefVersion="arn:aws:ecs:us-east-1:975050342959:task-definition/springdemo:1"
       - echo "new task def $taskDefVersion" 
-      - sed -i -e "s/TASKDEF/${taskDefVersion}/" appspec.yml 
+      - sed -i -e "s/TASKDEF/$taskDefVersion/" appspec.yml 
       - cat appspec.yml
       - echo listing all tasks after post_build phase 
       - aws ecs list-task-definitions 
