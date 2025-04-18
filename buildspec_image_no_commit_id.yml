@@ -74,7 +74,7 @@ phases:
       - cp codedeploy/appspec.yml appspec.yml
       - taskDefVersion="testval"
       - taskDefVersion=`getNewTaskDefinitionRevision.sh $accountID $task_name`  
-      - echo new task def: $taskDefVersion 
+      - echo "new task def: $taskDefVersion" 
       - sed -i -e "s/TASKDEF/${taskDefVersion}/" appspec.yml 
       - cat appspec.yml
       - echo listing all tasks after post_build phase 
