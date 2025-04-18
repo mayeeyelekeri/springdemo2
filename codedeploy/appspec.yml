@@ -3,7 +3,7 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: <TASKDEF>
+        TaskDefinition: TASKDEF
         LoadBalancerInfo:
           ContainerName: "SpringDemo"
           ContainerPort: 80
