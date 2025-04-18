@@ -28,14 +28,14 @@ phases:
       - ls -lrt /usr/bin/java 
       - ls -lrt /usr/bin/javac 
 
-#      - mvn clean package -Dmaven.test.skip=true
+      - mvn clean package -Dmaven.test.skip=true
       - echo Build Ended on `date`
 
   post_build:
     commands:
       - echo bucket name is $BUCKET_NAME
-#      - ls -lrt target 
-#      - cp target/springdemo2-1.0.0.jar codedeploy 
+      - ls -lrt target 
+      - cp target/springdemo2-1.0.0.jar codedeploy 
       - ls -lrt codedeploy
       
       # zipping is causing the issue during codedeploy 
@@ -58,9 +58,9 @@ phases:
       - commitId=`date +%s`
       
       - echo commitID is $commitId
-#      - docker build -t $springdemo_image_repo:$commitId .
-#      - docker push $springdemo_image_repo:$commitId
-#      - docker images 
+      - docker build -t $springdemo_image_repo:$commitId .
+      - docker push $springdemo_image_repo:$commitId
+      - docker images 
       
       # Generate Imagedefinitions.json file which is required to perform deployment 
       - printf '[{"name":"%s","imageUri":"%s%s%s"}]' "$container_name" "$accountName"/"$image_name":"$commitId" > imagedefinitions.json
