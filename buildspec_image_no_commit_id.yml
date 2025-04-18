@@ -72,6 +72,7 @@ phases:
       # Generate appspec.yaml file 
       # Get new task definition version 
       - cp codedeploy/appspec.yml appspec.yml
+      - taskDefVersion="testval"
       - taskDefVersion=`getNewTaskDefinitionRevision.sh $accountID $task_name`  
       - echo new task def: $taskDefVersion 
       - sed -i -e "s/TASKDEF/${taskDefVersion}/" appspec.yml 
