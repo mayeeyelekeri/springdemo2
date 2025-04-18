@@ -72,14 +72,11 @@ phases:
       
       # Generate appspec.yaml file 
       # Get new task definition version 
-      # - taskDefVersion=getNewTaskDefinitionRevision.sh $accountId "springdemo"  
-      - taskVer=`aws ecs describe-task-definition --task-definition $task_name --query "taskDefinition.revision"`
-      - taskVer=$((taskVer + 1))
-      - echo new Task ver = $taskVer
-      - sed -i -e "s/ACCOUNT_ID/$accountID/" codedeploy/appspec.yml 
-      - sed -i -e "s/TASKDEF/$task_name/" codedeploy/appspec.yml 
-      - sed -i -e "s/VERSION/$taskVer/" codedeploy/appspec.yml 
-      - cat codedeploy/appspec.yml
+      - cp codedeploy/appspec.yml appspec.yml
+      - taskDefVersion=getNewTaskDefinitionRevision.sh $accountId "springdemo"  
+      - echo new task def: $taskDefVersion 
+      - sed -i -e "s/TASKDEF/$taskDefVersion/" appspec.yml 
+      - cat appspec.yml
       - echo listing all tasks after post_build phase 
       - aws ecs list-task-definitions 
       - taskVer=`aws ecs describe-task-definition --task-definition $task_name --query "taskDefinition.revision"`
@@ -89,7 +86,7 @@ phases:
 artifacts:
   files:
     - imagedefinitions.json
-    - codedeploy/appspec.yml
+    - appspec.yml
   discard-paths: no  
 
 reports: 
