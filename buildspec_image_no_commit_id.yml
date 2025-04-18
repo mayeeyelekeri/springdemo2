@@ -16,6 +16,14 @@ phases:
 
     commands:
       - echo Pre-Build started on `date`
+      # Generate appspec.yaml file 
+      # Get new task definition version 
+      - cp codedeploy/appspec.yml appspec.yml
+      - taskDefVersion=`./getNewTaskDefinitionRevision.sh $accountID $task_name`  
+      - echo "new task def $taskDefVersion" 
+      - sed -i -e "s/TASKDEF/\$taskDefVersion/" appspec.yml 
+      - cat appspec.yml
+
 
   build:
     commands:
@@ -27,15 +35,6 @@ phases:
       - which javac 
       - ls -lrt /usr/bin/java 
       - ls -lrt /usr/bin/javac 
-
-      # Generate appspec.yaml file 
-      # Get new task definition version 
-      - cp codedeploy/appspec.yml appspec.yml
-      - taskDefVersion="testval"
-      - taskDefVersion=`./getNewTaskDefinitionRevision.sh $accountID $task_name`  
-      - echo "new task def $taskDefVersion" 
-      - sed -i -e "s/TASKDEF/\$taskDefVersion/" appspec.yml 
-      - cat appspec.yml
 
       - mvn clean package -Dmaven.test.skip=true
       - echo Build Ended on `date`
@@ -72,22 +71,11 @@ phases:
       - docker build -t $springdemo_image_repo:$commitId .
       - docker push $springdemo_image_repo:$commitId
       - docker images 
-      - echo listing all tasks after push to ECR 
-      - aws ecs list-task-definitions 
       
       # Generate Imagedefinitions.json file which is required to perform deployment 
       - printf '[{"name":"%s","imageUri":"%s%s%s"}]' "$container_name" "$accountName"/"$image_name":"$commitId" > imagedefinitions.json
       - cat imagedefinitions.json 
       
-      # Generate appspec.yaml file 
-      # Get new task definition version 
-      - cp codedeploy/appspec.yml appspec.yml
-      - taskDefVersion="testval"
-      - taskDefVersion=`./getNewTaskDefinitionRevision.sh $accountID $task_name`  
-      - echo "new task def $taskDefVersion" 
-      - sed -i -e "s/TASKDEF/$taskDefVersion/" appspec.yml 
-      - cat appspec.yml
-
 artifacts:
   files:
     - imagedefinitions.json
