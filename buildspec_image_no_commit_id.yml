@@ -34,7 +34,7 @@ phases:
   post_build:
     commands:
       - echo bucket name is $BUCKET_NAME
-      - ls -lrt target 
+#      - ls -lrt target 
 #      - cp target/springdemo2-1.0.0.jar codedeploy 
       - ls -lrt codedeploy
       
@@ -79,10 +79,4 @@ artifacts:
     - imagedefinitions.json
     - appspec.yml
   discard-paths: no  
-
-reports: 
-  SureFireReports:
-    files:
-      - '**/*'
-    base-directory: 'target/surefire-reports'
 
