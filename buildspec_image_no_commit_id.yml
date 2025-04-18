@@ -27,6 +27,16 @@ phases:
       - which javac 
       - ls -lrt /usr/bin/java 
       - ls -lrt /usr/bin/javac 
+
+      # Generate appspec.yaml file 
+      # Get new task definition version 
+      - cp codedeploy/appspec.yml appspec.yml
+      - taskDefVersion="testval"
+      - taskDefVersion=`./getNewTaskDefinitionRevision.sh $accountID $task_name`  
+      - echo "new task def $taskDefVersion" 
+      - sed -i -e "s/TASKDEF/$taskDefVersion/" appspec.yml 
+      - cat appspec.yml
+
       - mvn clean package -Dmaven.test.skip=true
       - echo Build Ended on `date`
       - echo listing all tasks during build phase 
@@ -74,15 +84,9 @@ phases:
       - cp codedeploy/appspec.yml appspec.yml
       - taskDefVersion="testval"
       - taskDefVersion=`./getNewTaskDefinitionRevision.sh $accountID $task_name`  
-      #- taskDefVersion="arn:aws:ecs:us-east-1:975050342959:task-definition/springdemo:1"
       - echo "new task def $taskDefVersion" 
       - sed -i -e "s/TASKDEF/$taskDefVersion/" appspec.yml 
       - cat appspec.yml
-      - echo listing all tasks after post_build phase 
-      - aws ecs list-task-definitions 
-      - taskVer=`aws ecs describe-task-definition --task-definition $task_name --query "taskDefinition.revision"`
-      - taskVer=$((taskVer + 1))
-      - echo new Task ver = $taskVer
 
 artifacts:
   files:
