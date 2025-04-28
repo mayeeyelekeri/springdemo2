@@ -1,36 +1,17 @@
 version: 0.0
 Resources:
-
-    # Pre-Requisites:
-    # - Network is setup
-    # 
-    # - Target ECS service should have been created  
-    # 
-    - TargetService:
+  - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:us-east-1:992382552000:task-definition/springdemo:1"
+        TaskDefinition: <TASKDEF>
         LoadBalancerInfo:
-          ContainerName: "springdemo"
+          ContainerName: "SpringDemo"
           ContainerPort: 80
-
-        # Optional properties
-        #PlatformVersion: "LATEST"
-        #NetworkConfiguration:
-        #  AwsvpcConfiguration:
-        #    Subnets: ["subnet-1234abcd","subnet-5678abcd"]
-        #    SecurityGroups: ["sg-12345678"]
-        #    AssignPublicIp: "DISABLED"
-        #CapacityProviderStrategy:
-          #- Base: 1
-          #  CapacityProvider: "FARGATE_SPOT"
-          #  Weight: 2
-        #  - Base: 0
-        #    CapacityProvider: "FARGATE"
-        #    Weight: 1
+        PlatformVersion: "LATEST"
+#
 Hooks:
-  - BeforeInstall: "LambdaFunctionToValidateBeforeInstall"
-  - AfterInstall: "LambdaFunctionToValidateAfterInstall"
-  - AfterAllowTestTraffic: "LambdaFunctionToValidateAfterTestTrafficStarts"
-  - BeforeAllowTraffic: "LambdaFunctionToValidateBeforeAllowingProductionTraffic"
-  - AfterAllowTraffic: "LambdaFunctionToValidateAfterAllowingProductionTraffic"
+  - BeforeInstall: "BeforeInstall"
+  - AfterInstall: "AfterInstall"
+  - AfterAllowTestTraffic: "AfterAllowTestTraffic"
+  - BeforeAllowTraffic: "BeforeAllowTraffic"
+  - AfterAllowTraffic: "AfterAllowTraffic"
