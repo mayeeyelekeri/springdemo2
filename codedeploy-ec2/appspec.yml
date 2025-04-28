@@ -19,7 +19,7 @@ hooks:
       runas: root
   
   # Cleanup tasks goes here  
-  AfterInstall:
+  ValidateService:
     - location: scripts/cleanup.sh
       timeout: 300
       runas: root 
