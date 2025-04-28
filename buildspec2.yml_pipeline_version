@@ -21,7 +21,8 @@ phases:
       - ls -lrt codedeploy-ec2
       - pwd 
       - ls -lrt
-      
+   
+   # For pipeline deployment, build artifact doesn't need to be zipped   
       - cp -r codedeploy-ec2/* . 
        
 artifacts:
@@ -31,6 +32,7 @@ artifacts:
     - Dockerfile 
     - scripts/start_server.sh 
     - scripts/stop_server.sh
+    - scripts/cleanup.sh
     - scripts/install_dependencies.sh
   
   discard-paths: no
