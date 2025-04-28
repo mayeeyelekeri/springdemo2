@@ -46,7 +46,8 @@ phases:
       - pwd 
       - ls -lrt
       
-      - cp -r codedeploy-ec2/* .
+      - cd codedeploy-ec2
+      - zip -r springdemo2.zip . 
        
 artifacts:
   files:
@@ -56,6 +57,6 @@ artifacts:
 #    - scripts/start_server.sh 
 #    - scripts/stop_server.sh
 #    - scripts/install_dependencies.sh
-    - '**/*'
-  base-directory: codedeploy-ec2
+    - codedeploy-ec2/springdemo2.zip
+  
   discard-paths: no
