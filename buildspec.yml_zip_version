@@ -59,4 +59,4 @@ artifacts:
 #    - scripts/install_dependencies.sh
     - codedeploy-ec2/springdemo2.zip
   
-  discard-paths: no
+  discard-paths: yes
