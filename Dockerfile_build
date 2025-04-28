@@ -1,0 +1,12 @@
+FROM maven:3.8.3-openjdk-17
+
+
+CMD ["./mavenBuildScript.sh"]
+
+# To build
+# docker build -t mymaven:3.8.3-openjdk-17 -f Dockerfile_build . 
+
+# To perform compilation 
+# docker run -it --user "$(id -u)":"$(id -g)" --rm -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven mymaven:3.8.3-openjdk-17 
+
+

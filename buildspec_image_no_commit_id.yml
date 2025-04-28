@@ -1,34 +1,21 @@
 version: 0.2
 
 env: 
+  variables: 
+    task_name: "springdemo" 
+    container_name: "SpringDemo" 
+    postfix: "dkr.ecr.us-east-1.amazonaws.com"
+    
   parameter-store:
       springdemo_image_repo: /dev/ecs/ecr_repository
       container_name: /dev/ecs/container_name
       image_name: /dev/ecs/image_name
 phases:
 
-
   install:
 
     commands:
       - echo Pre-Build started on `date`
-#      - echo before install 
-#      - yum install -y wget unzip zip jq 
-#      - wget https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_linux-x64_bin.tar.gz -P /tmp
-#      - tar xzf /tmp/openjdk-18_linux-x64_bin.tar.gz -C /opt
-#      - rm -rf /tmp/openjdk-18_linux-x64_bin.tar.gz
-#      - java --version 
-#      - javac --version 
-#      - ls -lrt /usr/bin/java 
-#      - ls -lrt /usr/bin/javac 
-#      - which java 
-#      - which javac 
-#      - echo before install 
-#      - update-alternatives --install /usr/bin/java java /opt/jdk-18/bin/java 3
-#      - update-alternatives --install /usr/bin/javac javac /opt/jdk-18/bin/javac 3
-#      - yum install java-17-amazon-corretto-devel -y
-#      - alternatives --install /usr/bin/java java /usr/lib/jvm/java-17-amazon-corretto.aarch64/bin/java 3
-#      - alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-17-amazon-corretto.aarch64/bin/javac 3
 
   build:
     commands:
@@ -40,6 +27,7 @@ phases:
       - which javac 
       - ls -lrt /usr/bin/java 
       - ls -lrt /usr/bin/javac 
+
       - mvn clean package -Dmaven.test.skip=true
       - echo Build Ended on `date`
 
@@ -62,7 +50,6 @@ phases:
       - echo accountID = $accountID
       - echo aws region = $AWS_REGION 
       - echo account ID prefix value = $accountId.dkr.ecr.us-east-1.amazonaws.com 
-      - postfix="dkr.ecr.us-east-1.amazonaws.com"
       - accountName=$accountID.$postfix
       - echo accountName = $accountName 
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $accountName 
@@ -79,13 +66,17 @@ phases:
       - printf '[{"name":"%s","imageUri":"%s%s%s"}]' "$container_name" "$accountName"/"$image_name":"$commitId" > imagedefinitions.json
       - cat imagedefinitions.json 
       
+      # Generate appspec.yaml file 
+      # Get new task definition version 
+      - cp codedeploy/appspec.yml appspec.yml
+      - taskDefVersion=`./getNewTaskDefinitionRevision.sh $accountID $task_name`  
+      - echo "new task def $taskDefVersion" 
+      - sed -i -e "s/TASKDEF/\$taskDefVersion/" appspec.yml 
+      - cat appspec.yml
+
 artifacts:
   files:
     - imagedefinitions.json
-  discard-paths: false  
-  
-reports: 
-  SureFireReports:
-    files:
-      - '**/*'
-    base-directory: 'target/surefire-reports'
+    - appspec.yml
+  discard-paths: no  
+

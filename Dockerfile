@@ -1,5 +1,7 @@
+# Using AWS public image repository which seems better
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:24-headful
 
-FROM openjdk:18-jdk-alpine
+#### FROM openjdk:18-jdk-alpine
 MAINTAINER Mahesh
 
 # Variables, which would be used here 
