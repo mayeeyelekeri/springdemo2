@@ -1,4 +1,5 @@
 #!/bin/bash
-# Remove temporary files created during deploy 
-rm -rf /tmp/Dockerfile /tmp/*.jar
-echo cleanup done  
+docker ps 
+docker ps -aqf "name=springdemo"  |xargs docker rm -f  | echo "removed any old running containers(if any)"
+docker ps 
+ 

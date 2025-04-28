@@ -6,15 +6,19 @@ files:
   - source: Dockerfile
     destination: /tmp
 hooks:
+  # stop any running containers 
   BeforeInstall:
     - location: scripts/stop_server.sh
       timeout: 300
       runas: root
+      
+  # Start application 
   ApplicationStart:
     - location: scripts/start_server.sh
       timeout: 300
       runas: root
-  #
+  
+  # Cleanup tasks goes here  
   AfterInstall:
     - location: scripts/cleanup.sh
       timeout: 300
