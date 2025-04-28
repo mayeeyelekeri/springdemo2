@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+
+  install:
+
+    commands:
+      - echo Pre-Build started on `date`
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn clean package -Dmaven.test.skip=true
+      - echo Build Ended on `date`
+
+  post_build:
+    commands:
+      - echo bucket name is $BUCKET_NAME
+      - ls -lrt target 
+      - cp target/springdemo2-1.0.0.jar codedeploy-ec2 
+      - ls -lrt codedeploy-ec2
+      - pwd 
+      - ls -lrt
+      
+      - cp -r codedeploy-ec2/* . 
+       
+artifacts:
+  files:
+    - springdemo2-1.0.0.jar
+    - appspec.yml 
+    - Dockerfile 
+    - scripts/start_server.sh 
+    - scripts/stop_server.sh
+    - scripts/install_dependencies.sh
+  
+  discard-paths: no

@@ -6,7 +6,7 @@ files:
   - source: Dockerfile
     destination: /tmp
 hooks:
-  # stop any running containers 
+  # Stop any running containers 
   BeforeInstall:
     - location: scripts/stop_server.sh
       timeout: 300
@@ -23,3 +23,31 @@ hooks:
     - location: scripts/cleanup.sh
       timeout: 300
       runas: root 
+
+# EC2 CodeDeploy hook events in sequence (without Load balancer in Deployment group):
+# Reference: https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-server
+
+# 1. ApplicationStop
+# 2. DownloadBundle 
+# 3. BeforeInstall 
+# 4. Install
+# 5. AfterInstall 
+# 6. ApplicationStart 
+# 7. ValidateService 
+
+# CodeDeploy hook events with ALB, additional events 
+# 1. BeforeBlockTraffic 
+# 2. BlockTraffic 
+# 3. AfterBlockTraffic
+
+# 4. ApplicationStop
+# 5. DownloadBundle 
+# 6. BeforeInstall 
+# 7. Install
+# 8. AfterInstall 
+# 9. ApplicationStart 
+# 10. ValidateService 
+ 
+# 11. BeforeAllowTraffic 
+# 12. AllowTraffic 
+# 13. AfterAllowTraffic 
