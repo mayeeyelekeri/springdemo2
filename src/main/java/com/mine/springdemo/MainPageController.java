@@ -27,6 +27,7 @@ public class MainPageController {
 			InetAddress myIP = InetAddress.getLocalHost();
 			System.out.println("system generated IP address: "+ myIP); 
             model.addAttribute("myIP", myIP); 
+            model.addAttribute("myHost", myIP.getHostName()); 
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
