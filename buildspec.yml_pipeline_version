@@ -24,6 +24,9 @@ phases:
    
    # For pipeline deployment, build artifact doesn't need to be zipped   
       - cp -r codedeploy-ec2/* . 
+      - ls -lrt 
+      - cat Dockerfile 
+      - cat appspec.yml 
        
 artifacts:
   files:
