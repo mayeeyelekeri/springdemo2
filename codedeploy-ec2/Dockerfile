@@ -1,5 +1,5 @@
-FROM openjdk:18-jdk-alpine
-MAINTAINER Mahesh
+# Using AWS public image repository which seems better
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:24-headful
 
 # Default value is "development", could be changed by passing other env 
 ENV WELCOME_MESSAGE="Hi, msg from Dockerfile" 
